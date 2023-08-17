@@ -1,0 +1,40 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block nav %}
+
+<form action='{% url 'encyclopedia:index' %}' method='post'>
+    {% csrf_token %}
+    {{ form }}  
+    <input type="submit">
+</form>
+<div>
+    <a href="{% url 'encyclopedia:index' %}">Home</a>
+</div>
+<div>
+    <a href="{% url 'encyclopedia:add' %}">Create New Page</a>
+</div>
+<div>
+    <a href={{ random }}>Random Page</a>
+</div>
+
+{% endblock nav %}
+
+{% block body %}
+    <h1>      {% if search %}
+    Search Results: {{ query }}
+    {% else %}
+    All Pages
+    {% endif %}
+    </h1>
+
+    <ul>
+        {% for entry in entries %}
+            <a href={{ entry.url }}><li>{{ entry.title }}</li></a>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+{% if title == None %}
+      New Entry
+{% else %}
+      Edit: {{ title }}
+{% endif %}
+{% endblock %}
+
+{% block nav %}
+<form action='{% url 'encyclopedia:index' %}' method='post'>
+      {% csrf_token %}
+      {{ form }}  
+      <input type="submit">
+  </form>
+  <div>
+      <a href="{% url 'encyclopedia:index' %}">Home</a>
+  </div>
+{% endblock nav %}
+
+{% block body %}  
+      <h1>
+      {% if title == None %}
+            Create New Page
+      {% else %}
+            Edit Page: {{ title }}
+      {% endif %}
+      </h1>
+
+      <form action="{% url 'encyclopedia:add' %}", method="post">
+            {% csrf_token %}
+            {{ entry_form }}
+            <input type="submit", value="Save Changes">
+      </form>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+    No Entry
+{% endblock %}
+
+{% block nav %}
+<form action='{% url 'encyclopedia:index' %}' method='post'>
+      {% csrf_token %}
+      {{ form }}  
+      <input type="submit">
+  </form>
+  <div>
+      <a href="{% url 'encyclopedia:index' %}">Home</a>
+  </div>
+{% endblock nav %}
+
+{% block body %}
+    <h1>Error</h1>
+
+    <p> {{ message }} </p>
+{% endblock %}
